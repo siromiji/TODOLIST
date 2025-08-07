@@ -98,3 +98,7 @@
             
             
         }
+        window.addEventListener('beforeinstallprompt', (e) => {
+         e.preventDefault();
+          e.prompt(); // 바로 설치 안내 뜨게 함
+        });
