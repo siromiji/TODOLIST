@@ -1,6 +1,6 @@
 {"name" : "할일 앱",
 "short_name" : "Todo",
-"start_url" : "./todoList.html",
+"start_url" : "./index.html",
 "display" : "standalone",
 "background_color" : "#fdf6ee",
 "theme_color" : "#4CAF50" , 
