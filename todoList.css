@@ -1,0 +1,72 @@
+
+       *{margin:0;padding: 0;box-sizing: border-box;}
+        body{
+        background-color: #fdf6ee;
+       }
+       main{
+            width:400px;
+            font-family: 20px;
+            text-align: center;
+            margin: 0 auto;
+            
+        }
+        main>div{
+            width:150px;
+            height:180px;
+            margin: 0 auto;
+            margin-bottom: 20px;
+        }
+        main>h2{
+            color: rgb(109, 72, 23);
+            margin: 20px;
+
+        }
+        main>div>div{
+            width:100%;
+        }
+        .happyImg{position: relative;width:100%;
+            height:130px; }
+        .happyImg>img{height:140px;position: absolute;left: 0;}
+        .happyImg>#heartImg{display: none;height:35px;top:-10px;left: 50%;transform: translate(-50%);}
+        .checkNum{
+            width:100%;
+            height:35px;
+            position: relative;
+            background-color: #ffffff;
+            cursor: pointer;
+            
+        }
+        .checkNum>.imgdiv{width:30px;}
+        .checkNum>.imgdiv>img{height:30px;}
+        .checkNum>.imgdiv,.checkNum>p{
+            display: inline-block;
+            position: absolute;
+            bottom: 0;}
+        .checkNum>.imgdiv{left:10px;}
+        .checkNum>p{
+            right:20px;
+            bottom:10px; }
+        input{
+            width:250px;height:50px;
+        }
+         input::placeholder{
+        
+            font-size: 18px;
+            text-align: center;
+                }
+        button{
+            width:70px;height:30px;
+
+        }
+        ul{ 
+            margin: 20px auto;
+            list-style: none;
+            width:300px;
+            
+        }
+        li{width: 100%;
+            margin-bottom: 5px;
+            background-color: #ffffff;
+            padding: 10px 0;
+            
+        }

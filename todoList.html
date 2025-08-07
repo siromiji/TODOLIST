@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./todoList.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="thema-color" content="#4CAF50">
+    
+    <title>Document</title>
+</head>
+<body>
+    <main>
+        <h2>나의 할 일 목록</h2>
+        <div >
+            <div class="happyImg">
+                <img src="./img/imoge.png" alt="이모티콘이미지"id="imogeImg">
+                <img src="./img/heart.png" alt="하트이미지" id="heartImg">
+            </div>
+            <div class="checkNum" id="checkMoney">
+                <div class="imgdiv">
+                    <img src="./img/coin.png" alt="코인이미지">
+                </div>
+                <p id="money">
+                    0
+                </p>
+            </div>
+        </div>
+        <input  type="text" id="todoInput" placeholder="할 일을 입력하세요">
+
+        <ul id="todoList"></ul>
+    </main>
+    <script src="./todoList.js"></script>
+    <script>
+        if('serviceWorker' in navigator){
+            navigator.serviceWorker.register('./service-worker.js')
+            .then(() => console.log("service worker 등록 완료"))
+            .catch(err => console.log("Service Worker 등록 실패:", err));
+        }
+    </script>
+
+</body>
+</html>
