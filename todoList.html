@@ -7,34 +7,44 @@
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#4CAF50">
     
-    <title>Document</title>
+    <title>TODOLIST</title>
 </head>
 <body>
-    <aside>
+    <section>
+        <aside>
         <h2>MEMO</h2>
-        <input type="text" name="memo" id="memo">
-        <input type="text" name="memo" id="memo">
-    </aside>
-    <main>
-        <h2>나의 할 일 목록</h2>
-        <div >
-            <div class="happyImg">
-                <img src="./img/imoge.png" alt="이모티콘이미지"id="imogeImg">
-                <img src="./img/heart.png" alt="하트이미지" id="heartImg">
-            </div>
-            <div class="checkNum" id="checkMoney">
-                <div class="imgdiv">
-                    <img src="./img/coin.png" alt="코인이미지">
-                </div>
-                <p id="money">
-                    0
-                </p>
-            </div>
-        </div>
-        <input  type="text" id="todoInput" placeholder="할 일을 입력하세요">
+            <input type="text" name="memo" id="memo">
+            <input type="text" name="memo" id="memo">
+        </aside>
 
-        <ul id="todoList"></ul>
-    </main>
+        
+        <main>
+            <h2>나의 할 일 목록</h2>
+            <div >
+                <div class="happyImg">
+                    <img src="./img/imoge.png" alt="이모티콘이미지"id="imogeImg">
+                    <img src="./img/heart.png" alt="하트이미지" id="heartImg">
+                </div>
+                <div class="checkNum" id="checkMoney">
+                    <div class="imgdiv">
+                        <img src="./img/coin.png" alt="코인이미지">
+                    </div>
+                    <p id="money">
+                        0
+                    </p>
+                </div>
+            </div>
+            <input  type="text" id="todoInput" placeholder="할 일을 입력하세요">
+
+            <ul id="todoList"></ul>
+        </main>
+
+        <div class="rightsec">
+        <h2>목표</h2>
+        <input type="text" id="listGoInput" placeholder="목표를 입력하세요">
+        <ul id="goalList"></ul>
+        </div>
+    </section>
     <script src="./todoList.js"></script>
     <script>
         if('serviceWorker' in navigator){

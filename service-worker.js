@@ -14,10 +14,10 @@ self.addEventListener("install",event =>{
     );
 });
 
-self.addEventListener("fetch", event =>{
-    event.respondWidth(
-        caches.match(event.request).then(cachedResponse => {
-            return cachedResponse || fetch(event.request);
-        })
-    );
+self.addEventListener("fetch", event => {
+  event.respondWith( // ← respondWith가 정답!
+    caches.match(event.request).then(cachedResponse => {
+      return cachedResponse || fetch(event.request);
+    })
+  );
 });

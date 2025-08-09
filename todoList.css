@@ -1,10 +1,9 @@
 
     *{margin:0;padding: 0;box-sizing: border-box;}
-        body{
-        background-color: #fdf6ee;
-       }
+
+    body{background-color: #fdf6ee;}
     aside{
-        z-index: -1;
+        
         width:400px;
         height:500px;
         position: absolute;
@@ -22,7 +21,7 @@
     }
 
        main{
-            background-color: #fdf6ee;
+
             width:400px;
             font-family: 20px;
             text-align: center;
@@ -46,7 +45,13 @@
         .happyImg{position: relative;width:100%;
             height:130px; }
         .happyImg>img{height:140px;position: absolute;left: 0;}
-        .happyImg>#heartImg{display: none;height:35px;top:-10px;left: 50%;transform: translate(-50%);}
+        .happyImg>#heartImg{
+            display: none;
+            height:35px;
+            top:-10px;
+            left: 50%;
+            transform: translate(-50%);
+        }
         .checkNum{
             width:100%;
             height:35px;
@@ -67,6 +72,7 @@
             bottom:10px; }
         input{
             width:250px;height:50px;
+            text-align: center;
         }
          input::placeholder{
         
@@ -80,7 +86,7 @@
         ul{ 
             margin: 20px auto;
             list-style: none;
-            width:300px;
+            width:250px;
             
         }
         li{
@@ -91,9 +97,29 @@
             padding: 10px 0;
             font-weight: 400;
             overflow: hidden;
+            text-align: center;
 
 
 
             
         }
         li:hover { cursor: pointer; }
+
+        .rightsec{
+            width:400px;
+            height:500px;
+            position: absolute;
+            right: 75px;
+            top:15px
+        }
+         .rightsec>h2{
+        color: rgb(109, 72, 23);
+        text-align: center;
+    }
+    .rightsec>input{
+        margin-top: 25px;
+        position: relative;
+        left:50%;transform: translateX(-50%);
+    
+    }
+    
