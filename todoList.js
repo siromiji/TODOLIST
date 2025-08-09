@@ -1,104 +1,123 @@
-      
-         
-         
-            
-                
-                    
-            //페이지 열릴 때 실행되는 함수 
-            window.onload = function(){
-                const checkNumDiv = document.getElementById("checkMoney");
-                const todoInput = document.getElementById("todoInput");
-                
-                //엔터 키 입력 시 addTodo 호출
-                todoInput.addEventListener("keydown", function (event){
-                    if (event.key === "Enter"){
-                        addTodo();//추가 버튼 대신 호출
-                    
-                    }
-                });
+// 페이지 열릴 때 실행되는 함수 
+window.onload = function(){
+    const checkNumDiv = document.getElementById("checkMoney");
+    const todoInput = document.getElementById("todoInput");
 
-                // 적립급 입력
-                checkNumDiv.onclick = function() {
-                //현재 적립금 가져오기
-                let moneyBasic = Number(document.getElementById("money").innerText);
-                //사용자에게 입력받음
-                let amount = prompt("사용하시겠습니까?", "100");
-                if (amount === null || amount.trim() === "") return;
-                
-                let  change = Number(amount);//숫자로 변환
-                if (isNaN(change)){
-                    alert("숫자만 입력해주세요");
-                    return;
-                    
-                }
-                
-                let newMoney = moneyBasic - change;
-                
-                document.getElementById("money").innerText= newMoney;
-                saveMoney(newMoney);
-                
-            }
-                //1. 저장된 할 일 목록 가져오기
-                const saveTodos = JSON.parse(localStorage.getItem("todos")|| "[]");
-                saveTodos.forEach(todo =>{
-                    createTodoItem(todo);
-                });
+    // 엔터 키 입력 시 addTodo 호출
+    todoInput.addEventListener("keydown", function (event){
+        if (event.key === "Enter"){
+            addTodo();
+        }
+    });
 
-                //2.저장된 적립금 가져오기
-                const saveMoney = localStorage.getItem("money");
-                if (saveMoney !== null) {
-                    document.getElementById("money").innerText = saveMoney
-                }
-            }
-      
-      function addTodo(){
-            const input= document.getElementById("todoInput");
-            const value = input.value.trim();
-            const heartImg = document.getElementById("heartImg");
-            const checkNumDiv = document.getElementById("checkMoney")
+    // 적립금 사용(차감)
+    checkNumDiv.onclick = function() {
+        let moneyBasic = Number(document.getElementById("money").innerText);
+        let amount = prompt("사용하시겠습니까?", "100");
+        if (amount === null || amount.trim() === "") return;
 
-         
+        let change = Number(amount);
+        if (isNaN(change)){
+            alert("숫자만 입력해주세요");
+            return;
+        }
+        let newMoney = moneyBasic - change;
+        document.getElementById("money").innerText = newMoney;
+        saveMoney(newMoney);
+    };
 
+    // 1) 저장된 할 일 가져와서 li 생성
+    const savedTodos = JSON.parse(localStorage.getItem("todos") || "[]");
+    savedTodos.forEach(text => createTodoItem(text));
 
+    // 2) 저장된 적립금 가져오기 (함수명과 변수명 충돌 방지)
+    const savedMoney = localStorage.getItem("money");
+    if (savedMoney !== null) {
+        document.getElementById("money").innerText = savedMoney;
+    }
+};
 
-            if(value === ""){
-                alert("할 일을 입력해주세요.")
-                return;
-            }
-            const li = document.createElement("li");
-            li.textContent = value;
+function addTodo(){
+    const input = document.getElementById("todoInput");
+    const value = input.value.trim();
+    if (value === ""){
+        alert("할 일을 입력해주세요.");
+        return;
+    }
+    createTodoItem(value);
+    input.value = "";
+    saveTodos();
+}
 
-            // 클릭 시 삭제
-            li.onclick = function(){
-                
-                // li 지우기
+// li 생성 + 이벤트 한 번에 붙이기
+function createTodoItem(text){
+    const li = document.createElement("li");
+    li.textContent = text;
+    li.dataset.original = text; // 원본 텍스트 저장
+    attachLiEvents(li);
+    document.getElementById("todoList").appendChild(li);
+}
+
+// hover/leave/클릭 이벤트
+function attachLiEvents(li){
+    const heartImg = document.getElementById("heartImg");
+
+    // 마우스 올리면 "완료", 벗어나면 원래대로
+    li.addEventListener("mouseenter", () => {
+        li.textContent = "완료";
+        li.style.color = "green";
+        li.style.fontWeight = "bold";
+
+    });
+    li.addEventListener("mouseleave", () => {
+        li.textContent = li.dataset.original || li.textContent;
+        li.style.color = "black";
+        li.style.fontWeight = "400";
+    });
+
+    // 클릭 시: 삭제 + 하트 + 적립 + 저장
+    li.addEventListener("click", () => {
+      li.style.height = li.offsetHeight + "px"; // 1) 시작 높이 고정
+        li.style.overflow = "hidden"; // 줄어들 때 내용 안 튀게
+        li.style.transition = "height .3s ease, opacity .3s ease, margin .3s ease, padding .3s ease";
+
+        // 2) 강제 리플로우로 시작 상태 적용
+        li.offsetHeight; 
+
+        // 3) 다음 프레임에 끝값 적용
+        requestAnimationFrame(() => {
+            li.style.opacity = "0";
+            li.style.margin = "0";
+            li.style.paddingTop = li.style.paddingBottom = "0";
+            li.style.height = "0";
+        });
+
+        // 4) 애니메이션 끝난 후 제거
+        li.addEventListener("transitionend", (e) => {
+            if (e.propertyName === "height") {
                 li.remove();
-                // 하트 나타났다가 숨기기
-                heartImg.style.display = "block"
-                setTimeout(function(){heartImg.style.display = "none";},300)
-                //적립금 100원씩 올리기 
-                let money = document.getElementById("money").innerText;
-                let moneyUp = Number(money);
-                let newMoney = moneyUp + 100; 
-                document.getElementById("money").innerText= newMoney
-                saveMoney(newMoney) ;
-                saveTodos();
             }
- 
-           
-            document.getElementById("todoList").appendChild(li);
-            input.value = "";//입력창 비우기
-            //저장
-            saveTodos();
-            function saveTodos(){
-                const items = document.querySelectorAll("#todoList li");
-                const todos = Array.from(items).map(li => li.textContent);
-                localStorage.setItem("todos", JSON.stringify(todos));
-            }
-            
-            
-        }
-        function saveMoney(amount){
-            localStorage.setItem("money", amount);
-            
-        }
+        }, { once: true });
+
+        heartImg.style.display = "block";
+        setTimeout(() => { heartImg.style.display = "none"; }, 300);
+        
+        let money = Number(document.getElementById("money").innerText);
+        let newMoney = money + 100;
+        document.getElementById("money").innerText = newMoney;
+        saveMoney(newMoney);
+
+        saveTodos();
+    });
+}
+
+// 현재 목록 저장(hover 중이어도 원본으로 저장)
+function saveTodos(){
+    const items = document.querySelectorAll("#todoList li");
+    const todos = Array.from(items).map(li => li.dataset.original || li.textContent);
+    localStorage.setItem("todos", JSON.stringify(todos));
+}
+
+function saveMoney(amount){
+    localStorage.setItem("money", amount);
+}
