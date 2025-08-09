@@ -70,3 +70,4 @@
             padding: 10px 0;
             
         }
+        li:hover { cursor: pointer; }
